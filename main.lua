@@ -8,31 +8,64 @@ love.graphics.setDefaultFilter("nearest")
 --cette ligne permet de déboguer pas a pas dans ZeroBrainStudio
 if arg[#arg] == "-debug" then require("mobdebug").start() end
 
-Ship = require("SpaceShip")
-Slim = require("Slims")
+math.randomseed(love.timer.getTime()) -- genere des nombre aleatoire a chaque partie
+ 
+
+DEBUGSHIP = false
+DEBUGSLIM = true
+---Constante---
+-----Vaisseau------
+ BOOST = 3  -- vitesse  de deplacement
+ FREIN =BOOST/1.5 --- parametre de ralentissement
+ ROTATION_SHIP = 5 -- vitesse de rotation du vaisseau
+ 
+ 
+ ------Zone de Jeu---
+ OFFSET = 5 --espace hors ecran pour le tp opposer rende mieux
+ 
+ -----Ecran---------
+ WIN_WIDTH,WIN_HEIGHT =love.window.getDesktopDimensions( display )
+
+
+
+
+
+
 
 
 function love.load()
-  
-  Width = love.graphics.getWidth()
-  Height = love.graphics.getHeight()
+ Ship = require("SpaceShip") --utilisation de la bibliotheque pour gerer le Vaisseau.
 
 end
 
 function love.update(dt)
-  
- 
-    
-      
+    Ship:update(dt)
+
+
 end
 
 
 function love.draw()
-  
+  Ship:draw()
 end
 
+
 function love.keypressed(key)
-  
+  if key == "i" then 
+    love.event.quit()
+    end
 
 
+end
+
+function CheckOutScreen(pObjet)
+  if pObjet.x < 0-OFFSET then
+    pObjet.x = WIN_WIDTH
+  elseif pObjet.x > WIN_WIDTH+OFFSET then
+    pObjet.x = 0
+  elseif pObjet.y < 0-OFFSET then
+    pObjet.y = WIN_HEIGHT
+  elseif pObjet.y > WIN_HEIGHT+OFFSET then
+    pObjet.y = 0
+  end
 end
