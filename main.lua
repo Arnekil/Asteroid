@@ -8,8 +8,8 @@ love.graphics.setDefaultFilter("nearest")
 --cette ligne permet de déboguer pas a pas dans ZeroBrainStudio
 if arg[#arg] == "-debug" then require("mobdebug").start() end
 
-Screan = require("ScreanManager")
-Sound = require("SoundManager")
+Ship = require("SpaceShip")
+Slim = require("Slims")
 
 
 function love.load()
@@ -33,6 +33,6 @@ end
 
 function love.keypressed(key)
   
-print(key)
+
 
 end
